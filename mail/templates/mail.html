@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+    <title>Send Email</title>
+    </head>
+    <body>
+        <div class="text">
+            <h1>SEND EMAIL</h1><hr>
+            <form action="" method="POST" class="contact-form">
+                {% csrf_token %}
+                <div>
+                    <div>Your Email</div>
+                    <input type="text" name="email">
+                </div>
+                <div>
+                    <div>Subject(제목)</div>
+                    <input type="text" name="subject">
+                </div>
+                <div>
+                    <div>Messaage(내용)</div>
+                    <textarea name="message" cols="30" rows="10"></textarea>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-outline-danger">Send Email</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
+{% endblock %}

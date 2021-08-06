@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+  {% block content %}
+  <title>Flea Market</title>
+  </head>
+  <body>
+    <h1>Detail Your Product</h1><br>
+    <div class="container">
+      <div class="card border-dark" style="width: 25rem; margin: auto;" >
+        <img src="{{blogModel.image.url}}" class="card-img-top">
+        <div class="card-body">
+          <h3 class="card-title">{{blogModel.title}}</h3>
+          <h6 class="card-subtitle mb-2 text-muted">{{blogModel.price}}</h6>
+          <p class="card-text">{{blogModel.content}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{blogModel.region}}</li>
+          <li class="list-group-item">{{blogModel.category}}</li>
+          <li class="list-group-item">{{blogModel.pub_date}}</li>
+        </ul>
+        <div class="card-footer text-muted">{{blogModel.writer}}</div>
+        <div class="card-body">
+            <a href="{% url 'edit' blogModel.id %}" class="card-link" style="font-size: large; font-style: italic;">수정하기</a>
+            <a href="{% url 'delete' blogModel.id %}" class="card-link" style="font-size: large; font-style: italic;">삭제하기</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+    <title>Flea Market</title>
+    </head>
+    <body>
+        <h1>Flea Market</h1>
+        <div class="container">
+          <div class="row">
+            {% for blogRow in blogObject %} 
+              <div class="card m-3 border-dark" style="width: 23rem; margin: auto;">
+                <img src="{{blogRow.image_thumbnail.url}}" class="card-img-top">
+                <div class="card-body">
+                  <h3 class="card-title">{{blogRow.title}}</h3>
+                  <h6 class="card-subtitle mb-2 text-muted">{{blogRow.price}}</h6>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">{{blogRow.region}}</li>
+                  <li class="list-group-item">{{blogRow.category}}</li>
+                  <li class="list-group-item">{{blogRow.pub_date}}</li>
+                </ul>
+                <div class="card-body">
+                  <p class="card-text">{{blogRow.summary}}</p>
+                  <a href="{%url 'detail' blogRow.id %}" class="card-link" style="font-size: large;">...more</a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>  
+        </div>
+
+        {% if blogObject.has_previous %} <!-- paginator가 굳이 필요 없는 글이 떳을 때의 에러 방지, 이전 글이 있는지-->
+        <a href="?page=1">처음</a>
+        <a href="?page={{blogObject.previous_page_number}}">이전</a> <!-- 이전 글에 해당하는 페이지 수를 계수로 넘겨줌 -->
+        {% endif %}
+
+        <span>{{blogObject.number}}</span> <!-- 현재 보고 있는 페이지 -->
+        <span>of</span>
+        <span>{{blogObject.paginator.num_pages}}</span> <!-- 마지막 페이지의 수 -->
+
+        {% if blogObject.has_next %} <!-- 다음 글이 있는지 -->
+        <a href="?page={{blogObject.next_page_number}}">다음</a>
+        <a href="?page={{blogObject.paginator.num_pages}}">마지막</a> <!-- 마지막 페이지 -->
+        {% endif %}
+    </body>
+</html>
+{% endblock %}

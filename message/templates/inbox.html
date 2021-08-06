@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+    <title>받은 쪽지함</title>
+    </head>
+    <body>
+        <h1>받은 쪽지함</h1><br>
+        <div class="container">
+            <div style="text-align: right;">
+                <a href="{%url 'new_message' %}">쪽지 보내기</a>
+                &nbsp;&nbsp;&nbsp;
+                <a href="{%url 'send_box' %}">보낸 쪽지함</a>
+            </div><br>
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>보낸이 ID</th>
+                    <th>받는이 ID</th>
+                    <th>내용</th>
+                    <th>보낸 시간</th>
+                    <th>자세히</th>
+                </tr>
+                {% for message in messages %} 
+                <tr>
+                    <td>{{message.senderID}}</td>
+                    <td>{{message.receiverID}}</td>
+                    <td>{{message.summary}}</td>
+                    <td>{{message.send_date}}</td> 
+                    <td><a href="{%url 'detail_message' message.id %}">...more</a></td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </body>
+</html>
+{% endblock %}
